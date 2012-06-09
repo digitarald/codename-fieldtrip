@@ -1,0 +1,8 @@
+{
+	'version': '0.1',
+	'name': 'Mixtape Stories',
+	'description': 'Every mix tape is a story. Put them together and they become the soundtrack of your life.',
+	'icons': {
+		'256': '/img/icon-256.png'
+	}
+}

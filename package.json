@@ -1,0 +1,45 @@
+{
+	"name": "codename-fieldtrip",
+	"version": "0.0.1",
+
+	"description": "Codename Fieldtrip, stealth project waiting to pivot!",
+
+	"dependencies": {
+		"connect": "2.x",
+		"express": "2.x",
+		"underscore": "1.3.x",
+		"uglify-js": "*",
+		"jade": "*",
+		"stylus": "*",
+		"nib": "*",
+		"requirejs": "*",
+		"socket.io": "*",
+		"async": "*",
+		"querystring": "*",
+		"oauth": "*",
+		"restler": "*",
+		"browserify": "*",
+		"less": "*",
+		"bootstrap": "*",
+		"passport": "*",
+		"passport-oauth": "*",
+		"passport-google-oauth": "*",
+		"passport-browserid": "*",
+		"pkginfo": "*"
+	},
+
+	"devDependencies": {
+		"should": "*",
+		"mocha": "*"
+	},
+
+	"scripts": {
+		"pretest": "jshint ./",
+		"test": "mocha",
+		"start": "foreman start"
+	},
+
+	"engines": {
+		"node": "0.6.x"
+	}
+}

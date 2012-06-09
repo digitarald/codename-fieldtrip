@@ -1,0 +1,6 @@
+--require should
+--reporter dot
+--ui exports
+--growl
+--timeout 1s
+--slow 500
