@@ -80,54 +80,22 @@ module.exports = Backbone.View.extend({
 		var users = this.users.toJSON(),
 			quiz = this.quiz.toJSON();
 
-		if (!this.rendered || !partial) {
+		this.rendered = true; // Limit to one initial render()
 
-			this.rendered = true; // Limit to one initial render()
-
-			var data = {
-				quiz: quiz,
-				users: users,
-				user_length: users
-			};
-
-			var str = this.template(data);
-			this.$el.html(str);
-
-	}
-
-		var questions = {},
-			user_length = users.length;
-
-		users.forEach(function(user) {
-			user.answers.forEach(function(answer_id, question_id) {
-
-				if (!questions[question_id]) {
-					questions[question_id] = {
-						total: quiz.questions[question_id].answers.length,
-						unanswered: 0
-					}
-				}
-				var question = questions[question_id];
-
-				if (!answer_id) {
-					question.unanswered = (question.unanswered || 0) + 1;
-					return;
-				}
-
-				question[answer_id] = (question[answer_id] || 0) + 1;
-			});
+		users = users.forEach(function(user) {
+			user.answered = user.answers.filter(function(answer) {
+				return answer != null;
+			}).length;
 		});
 
-		console.log(questions);
+		var data = {
+			quiz: quiz,
+			users: users,
+			user_length: users
+		};
 
-		for (var question_id in questions) {
-			var answers = questions[question_id];
-			for (var answer_id in answers) {
-				var value = answers[answer_id] || 0;
-				console.log(question_id, answer_id, value);
-				this.$el.find('#answer-' + question_id + '-' + answer_id).css('width', value + '%');
-			}
-		}
+		var str = this.template(data);
+		this.$el.html(str);
 	}
 
 });

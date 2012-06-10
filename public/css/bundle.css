@@ -6093,7 +6093,7 @@ li[class^="icon-"].icon-large:before, li[class*=" icon-"].icon-large:before {
 		width: 271px;
 }
 
-@media
+/*@media
 only screen and (min-width: 555px),
 only screen and (-webkit-min-device-pixel-ratio: 1.5),
 only screen and (-o-min-device-pixel-ratio: 3/2),
@@ -6103,7 +6103,11 @@ only screen and (min-device-pixel-ratio: 1.5) {
 		height: 377px;
 		width: 441px;
 	}
-}
+
+	#quizContainer {
+		font-size: 12px;
+	}
+}*/
 body {
   background: #fff url("/img/bg.png");
   font-family: Cabin, Arial, sans-serif;
@@ -6139,15 +6143,19 @@ figure {
 .btnBlue.hasBorders {
   border: 3px solid #1f6fbf;
 }
+#dashboard {
+  padding-top: 18px;
+}
 #dashboard figure table {
   width: 100%;
 }
 #dashboard ul#users {
   overflow: auto;
-  margin: 9px 0;
+  margin: 18px 0;
 }
 #dashboard ul#users li {
   float: left;
+  height: 24px;
   margin: 0 3px;
   padding: 0 9px;
   line-height: 24px;
@@ -6214,6 +6222,7 @@ figure {
 }
 #login form {
   margin: 0;
+  padding: 0 0 2em;
 }
 #login section {
   margin: 0.6em 0 0;
@@ -6269,35 +6278,35 @@ figure {
   font-size: 1.6em;
   font-weight: 600;
 }
+#quizContainer {
+  font-size: 10px;
+}
 #quizHeader {
   position: relative;
-}
-#quizHeader .wrapQuizHeader {
-  padding: 0 0 0 120px;
-  height: 156px;
+/*.wrapQuizHeader
+		padding 0 0 0 120px
+		height 156px*/
 }
 #quizHeader .logo {
-  height: 156px;
-  width: 191px;
+  height: 82px;
+  width: 100px;
   text-indent: 1000px;
   white-space: nowrap;
   overflow: hidden;
   background: url("../img/home_logo.png") no-repeat 0 0;
   -webkit-background-size: contain;
   background-size: contain;
-  position: absolute;
-  top: 0;
-  left: 0;
+  margin: 0 auto;
+/*position absolute
+		top 0
+		left 0*/
 }
 #quizHeader .titleWrap {
   border: solid #b4b5a8;
   border-width: 1px 0;
   margin: 0.6em;
-  padding: 14px 0 14px 80px;
-  height: 4.8em;
+  padding: 14px 0;
   overflow: hidden;
-  position: relative;
-  top: 40px;
 }
 #quizHeader .title {
   font-size: 2em;
@@ -6308,12 +6317,11 @@ figure {
   vertical-align: middle;
   height: 100%;
   width: 100%;
-}
-#quizHeader .title .titleText {
-  display: table-cell;
-  vertical-align: middle;
-  height: 100%;
-  width: 100%;
+/*.titleText
+			display table-cell
+			vertical-align middle
+			height 100%
+			width 100%*/
 }
 #questions li {
   font-size: 2em;

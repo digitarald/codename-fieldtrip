@@ -9,7 +9,7 @@
 		width: 271px;
 }
 
-@media
+/*@media
 only screen and (min-width: 555px),
 only screen and (-webkit-min-device-pixel-ratio: 1.5),
 only screen and (-o-min-device-pixel-ratio: 3/2),
@@ -19,4 +19,8 @@ only screen and (min-device-pixel-ratio: 1.5) {
 		height: 377px;
 		width: 441px;
 	}
-}
+
+	#quizContainer {
+		font-size: 12px;
+	}
+}*/
