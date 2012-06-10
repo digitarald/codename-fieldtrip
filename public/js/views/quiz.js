@@ -43,7 +43,7 @@ module.exports = Backbone.View.extend({
 			var questionId = i;
 			question['id'] = questionId;
 			question['answered'] = false;
-			if (answers[questionId])
+			if (answers[questionId] || answers[questionId] === 0)
 				question['answered'] = true;
 			$questions.append(this.questionTemplate(question));
 		}, this);

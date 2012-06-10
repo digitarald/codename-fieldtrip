@@ -52,7 +52,7 @@ module.exports = function(app) {
 		}
 	);
 
-	app.get('/auth/att/location', passport.authenticate('atnt', { scope: ['SMS','DC','TL'], failureRedirect: '/auth' }), function(req, res){
+	app.get('/auth/att/location', ensureAuthenticated, function(req, res){
 		db.getUserBySession(req.sessionID, function(err, user){
 			oauthAtnt.getDeviceLocation(null, user, function(err, data){
 				// app.socket.emit('location', data);

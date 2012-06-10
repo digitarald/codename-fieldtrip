@@ -239,8 +239,12 @@ io.sockets.on('connection', function(socket) {
 	});
 
 	socket.on('answer', function(answers) {
+		console.log('answer', answers);
+
 		db.saveUser(sessionID, {answers: answers}, function(err, user) {
 			io.sockets.emit('dashboard_answer', user);
+
+			console.log('answer saved', user.answers);
 
 			var data = {
 					user: current,

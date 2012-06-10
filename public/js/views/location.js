@@ -6,8 +6,8 @@ module.exports = Backbone.View.extend({
         // TODO: Set localStorage
 
         // Re-render if a user gets added
-        App.socket.on('user', _.bind(function(user) {
-            if (user.name) {
+        App.socket.on('location', _.bind(function(location) {
+            if (location.latitude) {
                 this.render();
             }
         }, this));
@@ -16,7 +16,6 @@ module.exports = Backbone.View.extend({
     render: function(main) {
         var str = this.template();
         this.$el.html(str);
-
     }
 
 });

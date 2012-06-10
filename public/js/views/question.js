@@ -18,7 +18,7 @@ module.exports = Backbone.View.extend({
 	answer: function(evt) {
 		var answers = App.user.get('answers');
 		var questionId = this.questionId;
-		var answerId = evt.target.dataset.id;
+		var answerId = $(evt.target).closest('.answer').data('id');
 		answers[questionId] = answerId;
 		App.user.set('answers', answers);
 

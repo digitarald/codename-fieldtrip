@@ -6317,6 +6317,7 @@ figure {
 }
 #questions li {
   font-size: 2em;
+  font-weight: 600;
   line-height: 1.2em;
   margin: 15px 0;
   position: relative;
@@ -6337,6 +6338,8 @@ figure {
 }
 #questions li .questionState {
   background: url("../img/sprite.png") no-repeat 0 0;
+  -webkit-background-size: cover;
+  background-size: cover;
   height: 89px;
   text-indent: 1000px;
   overflow: hidden;
@@ -6345,6 +6348,9 @@ figure {
   position: absolute;
   bottom: 0;
   right: 14px;
+}
+#questions .answered {
+  font-weight: 400;
 }
 #questions .answered article {
   min-height: 147px;
@@ -6367,6 +6373,7 @@ figure {
 }
 #answers li {
   font-size: 2em;
+  font-weight: 600;
   line-height: 1.1em;
   padding: 0.6em;
   background-color: #fff;
@@ -6389,6 +6396,9 @@ figure {
   border-radius: 7px;
   width: 1.4em;
   text-align: center;
+}
+#answers li.answered {
+  font-weight: 400;
 }
 #answers li.answered .answerLetter {
   -webkit-box-shadow: inset 1px 1px 5px rgba(0,0,0,0.3), inset -1px -1px 5px rgba(255,255,255,0.3);
