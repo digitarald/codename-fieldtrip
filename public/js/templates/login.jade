@@ -1,5 +1,13 @@
-.container
-	.span12
-
-		h3 Log in
-			img(src='http://123done.org/img/persona-login.png')
+#login.container
+	.row
+		.span6
+			#logo Did You Catch That?
+			section
+				form(method="post",action="/")
+					ol.fields
+						li.field
+							input#name(type="text",placeholder="What's your name?",required,value="#{user.name}")
+						li.field
+							button.btnOrange.hasBorders(type="submit") Login
+//			section#altLogins
+//				button.btnBlue.hasBorders#attLogin(type="button") Login with your AT&T Device

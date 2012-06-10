@@ -3,3 +3,4 @@ node_modules
 public/js/vendor
 public/js/templates
 public/js/bundle.js
+public/bundles

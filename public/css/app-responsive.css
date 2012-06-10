@@ -1,0 +1,22 @@
+#login #logo {
+	text-indent: 1000px;
+	white-space: nowrap;
+	overflow:hidden;
+	background:url('../img/home_logo.png') no-repeat 0 0;
+	background-size: contain;
+	margin:2em auto 2.4em;
+		height: 230px;
+		width: 271px;
+}
+
+@media
+only screen and (min-width: 555px),
+only screen and (-webkit-min-device-pixel-ratio: 1.5),
+only screen and (-o-min-device-pixel-ratio: 3/2),
+only screen and (min--moz-device-pixel-ratio: 1.5),
+only screen and (min-device-pixel-ratio: 1.5) {
+	#login #logo {
+		height: 377px;
+		width: 441px;
+	}
+}

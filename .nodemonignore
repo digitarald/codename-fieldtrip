@@ -1,3 +1,4 @@
+/public/bundles/*
 /public/js/bundle.js
 /public/css/bundle.css
 /public/js/templates/*

@@ -4,14 +4,12 @@ html
 		title= title
 		meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
 		link(rel='stylesheet', href='/css/bundle.css')
-		link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic')
+		link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Cabin:400,600,400italic')
 
 	body
-
-		header
 
 		| !{body}
 
 		script var env = !{JSON.stringify(env)};
 		script(src='/socket.io/socket.io.js')
-		script(src='/js/bundle.js')
+		script(src='/bundles/bundle.js')

@@ -54,7 +54,7 @@ module.exports = function(app) {
 		options.filename = file;
 
 		var fn = jade.compile(str, options).toString(),
-			save = path.join(folder, path.basename(file).replace(re, '.js'));
+			save = path.join(__dirname + '/public/bundles/templates', path.basename(file).replace(re, '.js'));
 
 		fs.writeFileSync(save, 'module.exports = ' + fn + ';');
 		console.log('Build: %s', save);
@@ -78,6 +78,6 @@ module.exports = function(app) {
 		filter: filter
 	}).bundle();
 
-	fs.writeFileSync(js + '/bundle.js', filter(buffer));
+	fs.writeFileSync(__dirname + '/public/bundles/bundle.js', filter(buffer));
 
 };

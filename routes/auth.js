@@ -1,38 +1,54 @@
-var passport = require('passport')
-    , attStrat = require('../lib/passport-atnt').Strategy;
-
-passport.use(new attStrat({
-    clientID: process.env.ATNT_ID,
-    clientSecret: process.env.ATNT_SECRET,
-    callbackURL: '127.0.0.1:' + process.env.PORT + '/att/auth/callback'
-},
-function(token, secret, profile, done){
-	console.log(arguments);
-}));
+var passport = require('passport'),
+	oauthAtnt = require('../oauth/atnt');
 
 module.exports = function(app) {
 
-	app.get('/', function(req, res) {
+	var db = require('../lib/db')(app);
 
-		res.render('index.jade', {
-			title: 'Project Fieldtrip',
-			env: {}
+	function index(req, res) {
+
+		db.getUserBySession(req.sessionID, function(err, user) {
+			res.render('index.jade', {
+				title: 'Project Fieldtrip',
+				env: {
+					user: user || null
+				}
+			});
+		})
+
+	};
+
+	app.get('/', index);
+
+	app.get('/login', index);
+
+	app.get('/dashboard', index);
+
+	app.get('/quiz', index);
+
+	app.get('/question/:id', index);
+
+	app.get('/auth', index);
+
+	app.post('/auth/req', function(req, res){
+		var obj = {telephone: req.param('telephone')};
+
+		db.saveUser(req.sessionID, obj, function(err, user){
+			res.redirect('/auth/att');
 		});
-
 	});
 
-	app.get('/login', function(){
-		res.render('index.jade');
-	})
+	app.get('/auth/att', passport.authenticate('atnt', {scope: ['SMS','DC','TL']}), function(req, res){});
 
-    app.get('/att/auth', passport.authenticate('atnt'), function(req, res){
-
-    });
-
-    app.get('/att/auth/callback',
-    	passport.authenticate('atnt`', { failureRedirect: '/login' }),
-    	function(req, res){
-    		res.redirect('/');
-    	});
+	app.get('/auth/att/callback',
+		passport.authenticate('atnt', { failureRedirect: '/auth' }),
+		function(req, res){
+			db.getUserBySession(req.sessionID, function(err, user){
+				oauthAtnt.getDeviceLocation(null, user, function(){
+					res.redirect('/');
+				});
+			});
+		}
+	);
 
 };

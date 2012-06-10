@@ -22,7 +22,7 @@
 	"predef"        : [  // Custom globals.
 		"Backbone",
 		"_",
-		"should"
+		"should", "io", "App"
 		],
 
 
@@ -53,7 +53,7 @@
 	// are for comparison, not assignments.
 	"boss"          : false,
 	// Require {} for every new block or scope.
-	"curly"         : true,
+	"curly"         : false,
 	// Require triple equals i.e. `===`.
 	"eqeqeq"        : false,
 	// Tolerate use of `== null`.
@@ -104,7 +104,7 @@
 	// `dict['key']` instead of `dict.key`.
 	"sub"           : false,
 	// Prohibit trailing whitespaces.
-	"trailing"      : true,
+	"trailing"      : false,
 	// Check against strict whitespace and indentation rules.
 	"white"         : false
 }

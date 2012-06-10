@@ -1,0 +1,11 @@
+#login.container
+    .row
+        .span12
+            #logo Did You Catch That?
+            section
+                form(method="post",action="/auth/req")
+                    ol.fields
+                        li.field
+                            input#telephone(name="telephone",type="tel",placeholder="Your AT&T Tel. Number",required,value="#{user.telephone}")
+                        li.field
+                            button.btnOrange.hasBorders(type="submit") Login

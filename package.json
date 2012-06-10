@@ -25,7 +25,8 @@
 		"passport-oauth": "*",
 		"passport-google-oauth": "*",
 		"passport-browserid": "*",
-		"pkginfo": "*"
+		"pkginfo": "*",
+		"request": "*"
 	},
 
 	"devDependencies": {

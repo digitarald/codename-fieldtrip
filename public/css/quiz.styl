@@ -1,0 +1,94 @@
+@import 'nib'
+
+#quizHeader
+	position relative
+	.wrapQuizHeader
+		padding 0 0 0 120px
+		height 156px
+	.logo
+		height 156px
+		width 191px
+		text-indent 1000px
+		white-space nowrap
+		overflow hidden
+		background url(../img/home_logo.png) no-repeat 0 0
+		background-size contain
+		position absolute
+		top 0
+		left 0
+	.titleWrap
+		border solid #b4b5a8
+		border-width 1px 0
+		margin 0.6em
+		padding 14px 0 14px 80px
+		height 4.8em
+		overflow hidden
+		position relative
+		top 40px
+	.title
+		font-size 2em
+		line-height 1.2em
+		font-style italic
+		color #4a4a4a
+		display table
+		vertical-align middle
+		height 100%
+		width 100%
+		.titleText
+			display table-cell
+			vertical-align middle
+			height 100%
+			width 100%
+			
+
+#questions
+	li
+		font-size 2em
+		line-height 1.2em
+		margin 15px 0
+		position relative
+		article
+			padding 14px
+			border-radius 9px
+			cursor pointer
+			min-height 89px
+		.questionNumber
+			font-style italic
+			margin 0 0 6px
+		.questionText
+			margin 0 117px 0 0
+		.questionState
+			background url(../img/sprite.png) no-repeat 0 0
+			height 89px
+			text-indent 1000px
+			overflow hidden
+			width 99px
+			white-space nowrap
+			position absolute
+			bottom 0
+			right 14px
+
+	.answered
+		article
+			min-height 147px
+		.questionState
+			height 147px
+			background-position 0 -89px
+
+#questionTitle
+	font-size 2.2em
+	font-weight 600
+	margin 1em 0
+	padding 0.6em
+	background #f4f2e5
+	border-radius 9px
+	box-shadow 1px 1px rgba(0, 0, 0, 0.3)
+#answers
+	li
+		padding 9px 18px
+		background-color #FFF
+		margin 15px 0
+		border-radius 9px
+		cursor pointer
+	.answered
+		background-color green

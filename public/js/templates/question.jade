@@ -1,0 +1,9 @@
+.container
+	.row
+		.span12
+			include quizHeader
+			#questionTitle #{title}
+			ul#answers.unstyled
+				each answer, id in answers
+					- var className = answerId == id ? 'answered' : null;
+					li.answer(class=className, data-id="#{id}") #{answer}

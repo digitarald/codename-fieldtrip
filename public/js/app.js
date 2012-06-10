@@ -3,10 +3,17 @@
 window.Backbone = require('./vendor/backbone');
 window._ = require('./vendor/underscore');
 
+var User = require('./models/user');
+var Quiz = require('./models/quiz');
+
 var Application = Backbone.Router.extend({
 
 	routes: {
-		'': 'login'
+		'': 'quiz',
+		'login': 'login',
+		'auth': 'attAuth',
+		'dashboard': 'dashboard',
+		'question/:id': 'question'
 	},
 
 	initialize: function() {
@@ -30,30 +37,52 @@ var Application = Backbone.Router.extend({
 		socket.on('connect', function() {
 			console.log('HELLO');
 		});
-		socket.on('users', function() {
-			console.log(arguments);
+
+		// TODO Just debug
+		socket.on('user', function(user) {
+			console.log('user', user);
+
+			if ( !user.name && (this.currentView != this.loginView || this.currentView != this.attAuthView) ) {
+				App.navigate('login')
+			}
+			App.user.set(user);
 		});
 
+		socket.on('quiz', _.bind(function(data) {
+			App.quiz.set(data.quiz);
+		}, this));
+
 		// Start up!
-		// setTimeout(_.bind(this.setup, this), 1);
+		setTimeout(_.bind(this.setup, this), 1);
 	},
 
 	setup: function() {
 
-		// views are delayed since their constructor might access window.App
+		App.user = new User(env.user || null);
+		App.quiz = new Quiz();
 
 		this.currentView = null;
 
-		// Create views
-		var HelloView = require('./views/hello');
-		this.helloView = new HelloView();
-
+		// views are delayed since their constructor might access window.App
 		var LoginView = require('./views/login');
 		this.loginView = new LoginView();
 
+		var QuizView = require('./views/quiz');
+		this.quizView = new QuizView();
+
+		var QuestionView = require('./views/question');
+		this.questionView = new QuestionView();
+
+		var DashboardView = require('./views/dashboard');
+		this.dashboardView = new DashboardView();
+
+		var attAuthView = require('./views/attAuth');
+		this.attAuthView = new attAuthView();
+
 		// Hide all views
-		this.helloView.$el.hide();
 		this.loginView.$el.hide();
+		this.quizView.$el.hide();
+		this.dashboardView.$el.hide();
 
 		// Start up!
 		Backbone.history.start({pushState: true});
@@ -80,16 +109,25 @@ var Application = Backbone.Router.extend({
 		this.currentView = to;
 	},
 
-	login: function() {
-
-		this.changeView(this.loginView);
-
+	dashboard: function() {
+		this.changeView(this.dashboardView);
 	},
 
-	hello: function() {
+	login: function() {
+		this.changeView(this.loginView);
+	},
 
-		this.changeView(this.helloView);
+	quiz: function() {
+		this.changeView(this.quizView);
+	},
 
+	question: function(id) {
+		this.questionView.questionId = id;
+		this.changeView(this.questionView);
+	},
+
+	attAuth: function(){
+		this.changeView(this.attAuthView);
 	}
 
 });

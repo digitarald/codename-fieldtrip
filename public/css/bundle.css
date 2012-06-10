@@ -6082,6 +6082,296 @@ li[class^="icon-"].icon-large:before, li[class*=" icon-"].icon-large:before {
 .icon-paste:before                { content: "\f0ea"; }
 
 .icon-user-md:before              { content: "\f200"; }
+#login #logo {
+	text-indent: 1000px;
+	white-space: nowrap;
+	overflow:hidden;
+	background:url('../img/home_logo.png') no-repeat 0 0;
+	background-size: contain;
+	margin:2em auto 2.4em;
+		height: 230px;
+		width: 271px;
+}
+
+@media
+only screen and (min-width: 555px),
+only screen and (-webkit-min-device-pixel-ratio: 1.5),
+only screen and (-o-min-device-pixel-ratio: 3/2),
+only screen and (min--moz-device-pixel-ratio: 1.5),
+only screen and (min-device-pixel-ratio: 1.5) {
+	#login #logo {
+		height: 377px;
+		width: 441px;
+	}
+}
 body {
-  background: #fff url("/img/light.png");
+  background: #fff url("/img/bg.png");
+  font-family: Cabin, Arial, sans-serif;
+}
+figure {
+  margin: 0;
+}
+.btnOrange {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #d26000), color-stop(1, #b3342a));
+  background: -webkit-linear-gradient(top, #d26000 0%, #b3342a 100%);
+  background: -moz-linear-gradient(top, #d26000 0%, #b3342a 100%);
+  background: -o-linear-gradient(top, #d26000 0%, #b3342a 100%);
+  background: -ms-linear-gradient(top, #d26000 0%, #b3342a 100%);
+  background: linear-gradient(top, #d26000 0%, #b3342a 100%);
+  color: #fff;
+  -webkit-border-radius: 9px;
+  border-radius: 9px;
+}
+.btnOrange.hasBorders {
+  border: 3px solid #c15400;
+}
+.btnBlue {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2383e1), color-stop(1, #33639a));
+  background: -webkit-linear-gradient(top, #2383e1 0%, #33639a 100%);
+  background: -moz-linear-gradient(top, #2383e1 0%, #33639a 100%);
+  background: -o-linear-gradient(top, #2383e1 0%, #33639a 100%);
+  background: -ms-linear-gradient(top, #2383e1 0%, #33639a 100%);
+  background: linear-gradient(top, #2383e1 0%, #33639a 100%);
+  color: #fff;
+  -webkit-border-radius: 9px;
+  border-radius: 9px;
+}
+.btnBlue.hasBorders {
+  border: 3px solid #1f6fbf;
+}
+#dashboard figure table {
+  width: 100%;
+}
+#dashboard ul#users {
+  overflow: auto;
+  margin: 9px 0;
+}
+#dashboard ul#users li {
+  float: left;
+  margin: 0 3px;
+  padding: 0 9px;
+  line-height: 24px;
+  font-weight: 700;
+  text-align: center;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  background-color: #eee;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#dashboard ul#users li.authed {
+  background-color: #666;
+  color: #fff;
+}
+#dashboard ul#activities,
+#dashboard ul#users {
+  margin: 0;
+  list-style: none;
+}
+#dashboard ul#activities li,
+#dashboard ul#users li {
+  margin-bottom: 9px;
+}
+#dashboard ul.questions,
+#dashboard ul.answers {
+  margin: 0;
+  list-style: none;
+}
+#dashboard figcaption {
+  font-size: 18px;
+  margin-top: 9px;
+}
+#dashboard ul.answers {
+  display: table;
+  width: 100%;
+  table-layout: auto;
+  margin: 9px 0;
+  color: #fff;
+}
+#dashboard ul.answers li.answer {
+  display: table-cell;
+  overflow: hidden;
+}
+#dashboard ul.answers li.answer.answer0 {
+  background: #c00;
+}
+#dashboard ul.answers li.answer.answer1 {
+  background: #0c0;
+}
+#dashboard ul.answers li.answer.answer2 {
+  background: #00c;
+}
+#dashboard ul.answers li.answer.answer3 {
+  background: #cc0;
+}
+#dashboard ul.answers li.answer.noAnswer {
+  background: #ccc;
+}
+#login {
+  text-align: center;
+}
+#login form {
+  margin: 0;
+}
+#login section {
+  margin: 0.6em 0 0;
+}
+#login .row {
+  margin: 0;
+}
+#login .row .span6 {
+  margin: 0 auto;
+  float: none;
+}
+#login ol.fields {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#login li.field {
+  margin: 0;
+  padding: 0;
+}
+#login input,
+#login button {
+  font-size: 1.8em;
+  line-height: 2.4em;
+  min-height: 2.4em;
+  display: inline;
+  width: 90%;
+  padding: 0 0.4em;
+  margin: 0;
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
+}
+#login input {
+  width: 87%;
+}
+#login button {
+  margin: 0.4em 0 0;
+  font-weight: 600;
+}
+#login hr {
+  border: 0;
+}
+#login hr:after {
+  content: "or";
+}
+#login #altLogins {
+  margin: 1.6em 0 0;
+}
+#login #altLogins:before {
+  content: "Or, to access questions in your area";
+  display: block;
+  margin: 0 0 0.6em;
+  font-size: 1.6em;
+  font-weight: 600;
+}
+#quizHeader {
+  position: relative;
+}
+#quizHeader .wrapQuizHeader {
+  padding: 0 0 0 120px;
+  height: 156px;
+}
+#quizHeader .logo {
+  height: 156px;
+  width: 191px;
+  text-indent: 1000px;
+  white-space: nowrap;
+  overflow: hidden;
+  background: url("../img/home_logo.png") no-repeat 0 0;
+  -webkit-background-size: contain;
+  background-size: contain;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#quizHeader .titleWrap {
+  border: solid #b4b5a8;
+  border-width: 1px 0;
+  margin: 0.6em;
+  padding: 14px 0 14px 80px;
+  height: 4.8em;
+  overflow: hidden;
+  position: relative;
+  top: 40px;
+}
+#quizHeader .title {
+  font-size: 2em;
+  line-height: 1.2em;
+  font-style: italic;
+  color: #4a4a4a;
+  display: table;
+  vertical-align: middle;
+  height: 100%;
+  width: 100%;
+}
+#quizHeader .title .titleText {
+  display: table-cell;
+  vertical-align: middle;
+  height: 100%;
+  width: 100%;
+}
+#questions li {
+  font-size: 2em;
+  line-height: 1.2em;
+  margin: 15px 0;
+  position: relative;
+}
+#questions li article {
+  padding: 14px;
+  -webkit-border-radius: 9px;
+  border-radius: 9px;
+  cursor: pointer;
+  min-height: 89px;
+}
+#questions li .questionNumber {
+  font-style: italic;
+  margin: 0 0 6px;
+}
+#questions li .questionText {
+  margin: 0 117px 0 0;
+}
+#questions li .questionState {
+  background: url("../img/sprite.png") no-repeat 0 0;
+  height: 89px;
+  text-indent: 1000px;
+  overflow: hidden;
+  width: 99px;
+  white-space: nowrap;
+  position: absolute;
+  bottom: 0;
+  right: 14px;
+}
+#questions .answered article {
+  min-height: 147px;
+}
+#questions .answered .questionState {
+  height: 147px;
+  background-position: 0 -89px;
+}
+#questionTitle {
+  font-size: 2.2em;
+  font-weight: 600;
+  margin: 1em 0;
+  padding: 0.6em;
+  background: #f4f2e5;
+  -webkit-border-radius: 9px;
+  border-radius: 9px;
+  -webkit-box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+}
+#answers li {
+  padding: 9px 18px;
+  background-color: #fff;
+  margin: 15px 0;
+  -webkit-border-radius: 9px;
+  border-radius: 9px;
+  cursor: pointer;
+}
+#answers .answered {
+  background-color: #008000;
 }

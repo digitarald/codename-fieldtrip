@@ -7,8 +7,7 @@ var connect = require('connect'),
 	qs = require('querystring'),
 	sio = require('socket.io'),
 	fs = require('fs'),
-	path = require('path'),
-	OAuth2 = require('oauth').OAuth2;
+	path = require('path');
 
 // Populate values .env (usually done by `foreman` cmd)
 
@@ -27,17 +26,6 @@ if (!process.env.PORT) {
 	process.env.PORT = 5000;
 }
 
-// Usergrid
-
-var apigUrl = 'http://api.usergrid.com/' + process.env.APIG_APP + '/';
-var apig = new OAuth2(process.env.APIG_ID, process.env.APIG_SECRET, apigUrl, 'token', 'token');
-
-var apigToken = null;
-apig.getOAuthAccessToken('', {
-	grant_type: 'client_credentials'
-}, function(err, access_token) {
-	apigToken = access_token;
-});
 
 // apig.get(apigUrl + '/mixtapes', apigToken, function(err, response) {
 //	try {
@@ -85,6 +73,9 @@ app.configure(function() {
     }
   }));
 
+	//ATT Oauth
+	require('./oauth/atnt').init(app);
+
 	app.use(app.router);
 
 	app.use(express.static(__dirname + '/public'), {
@@ -120,7 +111,6 @@ app.configure('production', function() {
 
 require('./build')(app);
 
-
 // Socket IO
 
 var io = sio.listen(app);
@@ -148,7 +138,7 @@ io.set('authorization', function(data, accept) {
 	data.cookie = parseCookie(data.headers.cookie);
 	// note that you will need to use the same key to grad the
 	// session id, as you specified in the Express setup.
-	data.sessionID = data.cookie['sid'];
+	data.sessionID = data.cookie.sid;
 
 	// console.log('authorization', data.sessionID);
 
@@ -164,13 +154,41 @@ io.set('authorization', function(data, accept) {
 	});
 });
 
-var sockets = {};
+var sockets = {}, dashboards = [];
 app.set('sockets', sockets);
+
+var db = require('./lib/db')(app);
 
 io.sockets.on('connection', function(socket) {
 
 	var sessionID = socket.handshake.sessionID;
 	var sess = socket.handshake.session;
+
+	var current;
+
+	db.getUserBySession(sessionID, function(err, user) {
+
+		db.saveUser(sessionID, {online: true}, function(err, user) {
+			current = user;
+			if (current) {
+				var data = {user: current};
+				if (current.name) {
+					data.message = 'joined and is ready for catching that!';
+				} else {
+					data.message = 'Somebody joined and can quiz as soon as he named himself!';
+				}
+				io.sockets.emit('dashboard_activity', data);
+			}
+		});
+
+		socket.emit('user', user);
+
+		io.sockets.emit('dashboard_user', user);
+	});
+	db.getQuiz(function(err, quiz) {
+		socket.emit('quiz', {quiz: quiz});
+	});
+
 
 	// console.log('connection', sessionID);
 
@@ -185,11 +203,52 @@ io.sockets.on('connection', function(socket) {
 	sockets[sessionID] = socket;
 
 	socket.on('disconnect', function() {
+		io.sockets.emit('dashboard_name', current);
+
 		delete sockets[sessionID];
-		io.sockets.emit('users', Object.keys(sockets).length);
+		// io.sockets.emit('users', Object.keys(sockets).length);
+		db.saveUser(sessionID, {online: false}, function() {});
 	});
 
-	io.sockets.emit('users', Object.keys(sockets).length);
+
+	socket.on('name', function(name) {
+		db.saveUser(sessionID, {name: name}, function(err, user) {
+			io.sockets.emit('dashboard_name', user);
+
+			current = user;
+
+			if (current) {
+				var data = {
+					user: current,
+					message: 'is ready for the quiz!'
+				};
+				io.sockets.emit('dashboard_activity', data);
+			}
+		});
+	});
+
+	socket.on('answer', function(answers) {
+		db.saveUser(sessionID, {answers: answers}, function(err, user) {
+			io.sockets.emit('dashboard_answer', user);
+
+			var data = {
+					user: current,
+					message: 'answered a question!'
+				};
+				io.sockets.emit('dashboard_activity', data);
+		});
+	});
+
+	socket.on('dashboard', function() {
+		if (dashboards.indexOf(sessionID) == -1) {
+			dashboards.push(sessionID);
+		}
+
+		db.getUsers(function(err, users) {
+			io.sockets.emit('users', users);
+		});
+	});
+
 });
 
 
@@ -210,6 +269,10 @@ app.get('/manifest.webapp', function(req, res) {
 	res.contentType('application/x-web-app-manifest+json');
 	res.sendfile(__dirname + '/public/manifest.webapp');
 
+});
+
+app.get('/deleteAll', function(req, res) {
+	db.deleteAll();
 });
 
 
