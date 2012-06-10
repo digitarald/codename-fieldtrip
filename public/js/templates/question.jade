@@ -4,6 +4,10 @@
 			include quizHeader
 			#questionTitle #{title}
 			ul#answers.unstyled
+				- var alphaToIdMap = ['A', 'B', 'C', 'D'];
 				each answer, id in answers
 					- var className = answerId == id ? 'answered btnBlue' : 'btnOrange';
-					li.answer(class=className, data-id="#{id}") #{answer}
+					- var answerLetter = alphaToIdMap[id];
+					li.answer(class=className, data-id="#{id}")
+						.answerLetter(class=className) #{answerLetter}
+						.answerText #{answer}

@@ -26,7 +26,6 @@ if (!process.env.PORT) {
 	process.env.PORT = 5000;
 }
 
-
 // apig.get(apigUrl + '/mixtapes', apigToken, function(err, response) {
 //	try {
 //		response = JSON.parse(response);
@@ -37,7 +36,19 @@ if (!process.env.PORT) {
 // Express configuration
 
 var app = module.exports = express.createServer(),
+	sessionStore;
+
+if (process.env.REDISTOGO_URL) {
+	var RedisStore = require('connect-redis')(express),
+		rtg = require('url').parse(process.env.REDISTOGO_URL),
+		redis = require('redis').createClient(rtg.port, rtg.hostname);
+
+  redis.auth(rtg.auth.split(':')[1]);
+
+  sessionStore = new RedisStore({client: redis});
+} else {
 	sessionStore = new express.session.MemoryStore();
+}
 
 app.configure(function() {
 

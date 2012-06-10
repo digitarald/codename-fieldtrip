@@ -42,9 +42,8 @@ var Application = Backbone.Router.extend({
 		// TODO Just debug
 		socket.on('user', function(user) {
 			console.log('user', user);
-
-			if ( !user.name && (this.currentView != this.loginView || this.currentView != this.attAuthView) ) {
-				App.navigate('login')
+			if ( !user.name && (!this.currentView || this.currentView != this.loginView || this.currentView != this.attAuthView) ) {
+				App.navigate('login', {trigger: true})
 			}
 			App.user.set(user);
 		});

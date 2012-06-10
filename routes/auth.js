@@ -1,6 +1,11 @@
 var passport = require('passport'),
 	oauthAtnt = require('../oauth/atnt');
 
+var ensureAuthenticated = function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/auth');
+}
+
 module.exports = function(app) {
 
 	var db = require('../lib/db')(app);
@@ -43,12 +48,23 @@ module.exports = function(app) {
 	app.get('/auth/att/callback',
 		passport.authenticate('atnt', { failureRedirect: '/auth' }),
 		function(req, res){
-			db.getUserBySession(req.sessionID, function(err, user){
-				oauthAtnt.getDeviceLocation(null, user, function(){
-					res.redirect('/');
-				});
-			});
+			res.redirect('/');
 		}
 	);
+
+	app.get('/auth/att/location', passport.authenticate('atnt', { scope: ['SMS','DC','TL'], failureRedirect: '/auth' }), function(req, res){
+		db.getUserBySession(req.sessionID, function(err, user){
+			oauthAtnt.getDeviceLocation(null, user, function(err, data){
+				// app.socket.emit('location', data);
+				res.render('location.jade', {
+					title: 'Project Fieldtrip',
+					location: data,
+					layout: false
+				})
+			});
+		});
+
+		// index.call(this, req, res);
+	})
 
 };

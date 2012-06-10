@@ -17,7 +17,7 @@ passport.deserializeUser(function(token, done) {
 passport.use(new attStrat({
     clientID: process.env.ATNT_ID,
     clientSecret: process.env.ATNT_SECRET,
-    callbackURL: 'http://localhost:' + process.env.PORT + '/auth/att/callback',
+    callbackURL: process.env.ATNT_HOST + '/auth/att/callback',
     passReqToCallback: true
 },
 function(req, token, refreshToken, profile, done){
@@ -42,7 +42,7 @@ exports.init = function(app){
 
 exports.getDeviceLocation = function(err, user, done){
     console.log(passport);
-    // http.get( baseUrl + '?token=');
+    console.log('user:', user);
     request.get(baseUrl + '1/devices/tel:'+ user.telephone +'/location' + '?access_token=' + user.attToken + '&requestedAccuracy=3000' + '&tolerance=DelayTolerant', function(err, r, data){
         var json = JSON.parse(data);
         console.log('deviceLocation:', json);

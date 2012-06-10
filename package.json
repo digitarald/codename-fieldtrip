@@ -26,6 +26,8 @@
 		"passport-google-oauth": "*",
 		"passport-browserid": "*",
 		"pkginfo": "*",
+		"connect-redis": "*",
+		"redis": "*",
 		"request": "*"
 	},
 

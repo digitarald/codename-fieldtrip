@@ -9,6 +9,8 @@ module.exports = Backbone.View.extend({
 
 	template: require('../../bundles/templates/dashboard'),
 
+	templateActivity: require('../../bundles/templates/activity'),
+
 	initialize: function() {
 
 		// Lots of new data, we can't do a partial update?
@@ -29,6 +31,13 @@ module.exports = Backbone.View.extend({
 				console.log('dashboard_user');
 				if (this.users) {
 					this.users.add(user);
+					this.render();
+				}
+			}, this));
+
+			App.socket.on('dashboard_activity', _.bind(function(data) {
+				if (data.user.name) {
+					this.$el.find('#activities').append('');
 					this.render();
 				}
 			}, this));
@@ -92,8 +101,13 @@ module.exports = Backbone.View.extend({
 		users.forEach(function(user) {
 			user.answers.forEach(function(answer_id, question_id) {
 
-				var total = quiz.questions[question_id].answers.length,
-					question = questions[question_id] || (questions[question_id] = {});
+				if (!questions[question_id]) {
+					questions[question_id] = {
+						total: quiz.questions[question_id].answers.length,
+						unanswered: 0
+					}
+				}
+				var question = questions[question_id];
 
 				if (!answer_id) {
 					question.unanswered = (question.unanswered || 0) + 1;
@@ -103,6 +117,8 @@ module.exports = Backbone.View.extend({
 				question[answer_id] = (question[answer_id] || 0) + 1;
 			});
 		});
+
+		console.log(questions);
 
 		for (var question_id in questions) {
 			var answers = questions[question_id];
