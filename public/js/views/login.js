@@ -3,7 +3,7 @@ module.exports = Backbone.View.extend({
 	template: require('../../bundles/templates/login'),
 
     events: {
-        'click button[type=submit]': 'submit'
+        'submit': 'submit'
     },
 
 	initialize: function() {
@@ -23,7 +23,7 @@ module.exports = Backbone.View.extend({
 
         if (!name) return;
 
-        App.navigate('quiz', {trigger: true});
+        App.navigate('', {trigger: true});
         App.socket.emit('name', name);
     },
 

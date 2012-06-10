@@ -12,6 +12,7 @@ var Application = Backbone.Router.extend({
 		'': 'quiz',
 		'login': 'login',
 		'auth': 'attAuth',
+		'auth/att/location': 'location',
 		'dashboard': 'dashboard',
 		'question/:id': 'question'
 	},
@@ -79,6 +80,9 @@ var Application = Backbone.Router.extend({
 		var attAuthView = require('./views/attAuth');
 		this.attAuthView = new attAuthView();
 
+		var attLocationView = require('./views/location');
+		this.attLocationView = attLocationView;
+
 		// Hide all views
 		this.loginView.$el.hide();
 		this.quizView.$el.hide();
@@ -128,6 +132,10 @@ var Application = Backbone.Router.extend({
 
 	attAuth: function(){
 		this.changeView(this.attAuthView);
+	},
+
+	location: function(){
+		this.changeView(this.attLocation);
 	}
 
 });

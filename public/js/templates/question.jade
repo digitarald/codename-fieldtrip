@@ -5,5 +5,5 @@
 			#questionTitle #{title}
 			ul#answers.unstyled
 				each answer, id in answers
-					- var className = answerId == id ? 'answered' : null;
+					- var className = answerId == id ? 'answered btnBlue' : 'btnOrange';
 					li.answer(class=className, data-id="#{id}") #{answer}
